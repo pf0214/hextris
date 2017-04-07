@@ -1,35 +1,38 @@
 function Block(fallingLane, color, iter, distFromHex, settled) {
-	// whether or not a block is rested on the center hex or another block
+// 判断色块是否已到达底部，到达中心位置或者落在其他色块之上
 	this.settled = (settled === undefined) ? 0 : 1;
 	this.height = settings.blockHeight;
-	//the lane which the block was shot from
+// 当前色块所处的通道（六边形中第几个边坠落）,初始坠落通道
 	this.fallingLane = fallingLane;
 
-		this.checked=0;
-	//the angle at which the block falls
+	this.checked=0;
+// 根据当前所处通道，算出当前色块的角度
 	this.angle = 90 - (30 + 60 * fallingLane);
 	//for calculating the rotation of blocks attached to the center hex
 	this.angularVelocity = 0;
-	this.targetAngle = this.angle;
+	this.targetAngle = this.angle;//目标坠落区域
 	this.color = color;
-	//blocks that are slated to be deleted after a valid score has happened
+	// 于周围色块比较，判断当前色块是否消失
 	this.deleted = 0;
 	//blocks slated to be removed from falling and added to the hex
+	// 判断当前色块是移除还是添加到其他色块或中心点上
 	this.removed = 0;
 	//value for the opacity of the white blcok drawn over falling block to give it the glow as it attaches to the hex
 	this.tint = 0;
-	//value used for deletion animation
+	// 用于删除时的动画
 	this.opacity = 1;
 	//boolean for when the block is expanding
 	this.initializing = 1;
 	this.ict = MainHex.ct;
-	//speed of block
+// 当前色块坠落的速度
 	this.iter = iter;
 	//number of iterations before starting to drop
+	// 开始坠落前的重复次数
 	this.initLen = settings.creationDt;
 	//side which block is attached too
+	// 最终落下时添加到哪一个通道上
 	this.attachedLane = 0;
-	//distance from center hex
+	// 距离中心区域的距离，用来进行相应的缩放和判断是否与其他的色块相碰撞
 	this.distFromHex = distFromHex || settings.startDist * settings.scale ;
 
 	this.incrementOpacity = function() {
@@ -92,7 +95,7 @@ function Block(fallingLane, color, iter, distFromHex, settled) {
 		else {
 			this.angle += this.angularVelocity;
 		}
-		
+
 		this.width = 2 * this.distFromHex / Math.sqrt(3);
 		this.widthWide = 2 * (this.distFromHex + this.height) / Math.sqrt(3);
 		//this.widthWide = this.width + this.height + 3;
@@ -120,7 +123,7 @@ function Block(fallingLane, color, iter, distFromHex, settled) {
 		}
 
 		if (this.deleted) {
-			ctx.fillStyle = "#FFF";
+			ctx.fillStyle = "#FFF";// 消除后填充白色
 		} else if (gameState === 0) {
 			if (this.color.charAt(0) == 'r') {
 				ctx.fillStyle = rgbColorsToTintedColors[this.color];
@@ -184,7 +187,7 @@ function findCenterOfBlocks(arr) {
 		while (ang < 0) {
 			ang += 360;
 		}
-		
+
 		avgAngle += ang % 360;
 	}
 
