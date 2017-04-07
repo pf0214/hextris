@@ -1,4 +1,4 @@
-function Hex(sideLength) {
+function Hex(sideLength) {//六边形游戏控制区
 	this.playThrough = 0;
 	this.fillColor = [44,62,80];
 	this.tempColor = [44,62,80];
@@ -13,7 +13,7 @@ function Hex(sideLength) {
 	this.shakes = [];
 	this.sideLength = sideLength;
 	this.strokeColor = 'blue';
-	this.x = trueCanvas.width / 2;
+	this.x = trueCanvas.width / 2;//控制在画布中的位置
 	this.y = trueCanvas.height / 2;
 	this.ct = 0;
 	this.lastCombo = this.ct - settings.comboTime;
@@ -160,7 +160,7 @@ function Hex(sideLength) {
 		else {
 			this.angle += this.angularVelocity;
 		}
- 
+
 		drawPolygon(this.x + gdx, this.y + gdy + this.dy, this.sides, this.sideLength, this.angle,arrayToColor(this.fillColor) , 0, 'rgba(0,0,0,0)');
 	};
 }
