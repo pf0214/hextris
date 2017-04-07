@@ -158,7 +158,6 @@ function gameOverDisplay() {
 	$("#container").fadeIn();
 	$("#socialShare").fadeIn();
 	$("#restart").fadeIn();
-    set_score_pos();
 }
 
 function updateHighScores (){
