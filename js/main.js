@@ -1,3 +1,4 @@
+// 页面变化时调整页面布局
 function scaleCanvas() {
 	canvas.width = $(window).width();
 	canvas.height = $(window).height();
@@ -8,11 +9,13 @@ function scaleCanvas() {
 		settings.scale = (canvas.height / 800) * settings.baseScale;
 	}
 
+// 更新全局画布大小
 	trueCanvas = {
 		width: canvas.width,
 		height: canvas.height
 	};
 
+// 按像素比例缩放
 	if (window.devicePixelRatio) {
 		var cw = $("#canvas").attr('width');
 		var ch = $("#canvas").attr('height');
@@ -65,9 +68,10 @@ function hideUIElements() {
 	$('#startBtn').hide();
 }
 
+// 根据键盘输入触发不同游戏状态
 function init(b) {
 	if(settings.ending_block && b == 1){return;}
-	if (b) {
+	if (b) {//刷新，回车键或刷新按钮传入值为1的参数
 		$("#pauseBtn").attr('src',"./images/btn_pause.svg");
 		if ($('#helpScreen').is(":visible")) {
 			$('#helpScreen').fadeOut(150, "linear");
@@ -160,6 +164,7 @@ function init(b) {
 	hideText();
 }
 
+// 添加新的色块（色块，颜色，难度等级，）
 function addNewBlock(blocklane, color, iter, distFromHex, settled) { //last two are optional parameters
 	iter *= settings.speedModifier;
 	if (!history[MainHex.ct]) {
@@ -186,8 +191,9 @@ function exportHistory() {
 	toggleDevTools();
 }
 
+// 尤其启动初始界面
 function setStartScreen() {
-	$('#startBtn').show();
+	$('#startBtn').show();//显示启动按钮
 	init();
 	if (isStateSaved()) {
 		importing = 0;

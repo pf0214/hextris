@@ -95,21 +95,25 @@ function initialize(a) {
 		settings.os="ios";
 	}
 
+	// 获得全局画布
 	window.canvas = document.getElementById('canvas');
 	window.ctx = canvas.getContext('2d');
 	window.trueCanvas = {
 		width: canvas.width,
 		height: canvas.height
 	};
+
+	// 调整布局页面main.js中
 	scaleCanvas();
 
-	window.framerate = 60;
+	window.framerate = 60;//帧率
 	window.history = {};
 	window.score = 0;
 	window.scoreAdditionCoeff = 1;
 	window.prevScore = 0;
 	window.numHighScores = 3;
 
+// 查询暂存本地的历史记录
 	highscores = [];
 	if (localStorage.getItem('highscores')) {
 		try {
